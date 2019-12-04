@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper>
+<!--    通过名称获取分类信息-->
+    <select id="getByName" parameterType="java.lang.String" resultType="com.ual.blog.model.Category">
+        SELECT
+            c.id,
+            c.name,
+            c.sort,
+            c.descr,
+            c.img_url
+        FROM
+            t_category c
+        WHERE
+            c.name = #{categoryName}
+    </select>
+
+<!--    获取带有分类文章数目的分类列表-->
+    <select id="getCategoryList" resultType="java.util.Map">
+        SELECT
+            c.name,
+            c.img_url AS imgUrl,
+            count(p.`status` = 1 or null) AS postCount
+        FROM
+                t_category c
+        LEFT JOIN t_post p ON p.category_id = c.id
+        GROUP BY
+            c.id
+        ORDER BY
+            c.sort ASC
+    </select>
+</mapper>
