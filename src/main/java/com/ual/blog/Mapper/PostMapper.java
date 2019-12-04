@@ -33,5 +33,42 @@ public interface PostMapper extends BaseMapper<Post>{
      * @return
      */
     Post getByPostUrl(String postUrl);
+    /**
+     * 获取上一篇文章
+     * @param id
+     * @return
+     */
+    Post getPreviousInfo(Integer id);
 
+    /**
+     * 获取下一篇文章
+     * @param id
+     * @return
+     */
+    Post getNextInfo(Integer id);
+
+    /**
+     * 通过关键字搜索文章
+     * @param keyword
+     * @return
+     */
+    List<Post> queryByKeyworld(String keyword);
+
+    /**
+     * 批量删除
+     * @param idList
+     */
+    void deleteBatch(@Param("idList") List<Integer> idList);
+
+    /**
+     * 批量插入
+     * @param postList
+     */
+    void insertBatch(@Param("postList") List<Post> postList);
+
+    /**
+     * 插入前检测
+     * @param post
+     */
+    void checkInsert(Post post);
 }
