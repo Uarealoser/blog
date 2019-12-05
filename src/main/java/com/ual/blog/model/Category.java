@@ -31,6 +31,8 @@ public class Category {
     @NotEmpty(message = "名字不能为空")
     private String name;
 
+    private Integer sort;
+
     private String descr;
 
     private String color;
